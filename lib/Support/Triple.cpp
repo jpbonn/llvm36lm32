@@ -24,6 +24,7 @@ const char *Triple::getArchTypeName(ArchType Kind) {
   case arm:         return "arm";
   case armeb:       return "armeb";
   case hexagon:     return "hexagon";
+  case mico32:      return "mico32";
   case mips:        return "mips";
   case mipsel:      return "mipsel";
   case mips64:      return "mips64";
@@ -191,6 +192,7 @@ Triple::ArchType Triple::getArchTypeForLLVMName(StringRef Name) {
     .Case("arm64", aarch64) // "arm64" is an alias for "aarch64"
     .Case("arm", arm)
     .Case("armeb", armeb)
+    .Case("mico32", mico32)
     .Case("mips", mips)
     .Case("mipsel", mipsel)
     .Case("mips64", mips64)

@@ -1160,6 +1160,7 @@ void SelectionDAGLegalize::LegalizeOp(SDNode *Node) {
   if (Node->getOpcode() == ISD::TargetConstant) // Allow illegal target nodes.
     return;
 
+#ifndef NDEBUG
   for (unsigned i = 0, e = Node->getNumValues(); i != e; ++i)
     assert(TLI.getTypeAction(*DAG.getContext(), Node->getValueType(i)) ==
              TargetLowering::TypeLegal &&
@@ -1171,6 +1172,24 @@ void SelectionDAGLegalize::LegalizeOp(SDNode *Node) {
               TargetLowering::TypeLegal ||
             Node->getOperand(i).getOpcode() == ISD::TargetConstant) &&
            "Unexpected illegal type!");
+#else
+  for (unsigned i = 0, e = Node->getNumValues(); i != e; ++i)
+    assert(getTypeAction(Node->getValueType(i)) == Legal &&
+           "Unexpected illegal type!");
+
+  for (unsigned i = 0, e = Node->getNumOperands(); i != e; ++i)
+  {
+    if (!(isTypeLegal(Node->getOperand(i).getValueType()) ||
+            Node->getOperand(i).getOpcode() == ISD::TargetConstant)) {
+      DAG.setGraphColor(Node, "yellow");
+      dbgs() << "problematic node: " << Node << "\n";
+      DAG.viewGraph();
+      dbgs() << "illegal operand number:" << i << "\n";
+      dbgs() << "(isTypeLegal(Node->getOperand(i).getValueType()) is: " << (isTypeLegal(Node->getOperand(i).getValueType())) << "\n";
+      dbgs() << "(Node->getOperand(i).getOpcode() == ISD::TargetConstant) is: " << (Node->getOperand(i).getOpcode() == ISD::TargetConstant) << "\n"; 
+    }
+  }
+#endif
 
   // Figure out the correct action; the way to query this varies by opcode
   TargetLowering::LegalizeAction Action = TargetLowering::Legal;
