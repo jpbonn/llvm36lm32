@@ -87,6 +87,8 @@ const char *Triple::getArchTypePrefix(ArchType Kind) {
   case amdgcn:
   case r600:        return "amdgpu";
 
+  case mico32:      return "mico32";
+
   case sparcv9:
   case sparc:       return "sparc";
 
