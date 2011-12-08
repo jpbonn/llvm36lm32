@@ -5056,6 +5056,8 @@ else
  ;;
     ARM)         TARGET_HAS_JIT=1
  ;;
+    Mico32)      TARGET_HAS_JIT=0
+ ;;
     Mips)        TARGET_HAS_JIT=1
  ;;
     XCore)       TARGET_HAS_JIT=0
@@ -5310,7 +5312,7 @@ _ACEOF
 
 fi
 
-ALL_TARGETS="X86 Sparc PowerPC ARM AArch64 Mips XCore MSP430 CppBackend NVPTX Hexagon SystemZ R600"
+ALL_TARGETS="X86 Sparc PowerPC ARM AArch64 Mico32 Mips XCore MSP430 CppBackend NVPTX Hexagon SystemZ R600"
 ALL_TARGETS=$ALL_TARGETS
 
 
@@ -5355,6 +5357,7 @@ case "$enableval" in
             PowerPC)     TARGETS_TO_BUILD="PowerPC $TARGETS_TO_BUILD" ;;
             AArch64)     TARGETS_TO_BUILD="AArch64 $TARGETS_TO_BUILD" ;;
             ARM)         TARGETS_TO_BUILD="ARM $TARGETS_TO_BUILD" ;;
+            Mico32)      TARGETS_TO_BUILD="Mico32 $TARGETS_TO_BUILD" ;;
             Mips)        TARGETS_TO_BUILD="Mips $TARGETS_TO_BUILD" ;;
             XCore)       TARGETS_TO_BUILD="XCore $TARGETS_TO_BUILD" ;;
             MSP430)      TARGETS_TO_BUILD="MSP430 $TARGETS_TO_BUILD" ;;
