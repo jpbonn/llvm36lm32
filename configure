@@ -1434,7 +1434,7 @@ Optional Features:
                           Enable crash handling overrides (default is YES)
   --enable-targets        Build specific host targets: all or
                           target1,target2,... Valid targets are: host, x86,
-                          x86_64, sparc, powerpc, arm64, arm, aarch64, mico32, mips,
+                          x86_64, sparc, powerpc, arm64, arm, aarch64, lm32, mips,
                           hexagon, xcore, msp430, nvptx, systemz, r600, and
                           cpp (default=all)
   --enable-experimental-targets
@@ -4137,7 +4137,7 @@ else
   arm64*-*)               llvm_cv_target_arch="AArch64" ;;
   arm*-*)                 llvm_cv_target_arch="ARM" ;;
   aarch64*-*)             llvm_cv_target_arch="AArch64" ;;
-  mico32-*)               llvm_cv_target_arch="Mico32" ;;
+  lm32-*)                 llvm_cv_target_arch="LM32" ;;
   mips-* | mips64-*)      llvm_cv_target_arch="Mips" ;;
   mipsel-* | mips64el-*)  llvm_cv_target_arch="Mips" ;;
   xcore-*)                llvm_cv_target_arch="XCore" ;;
@@ -5056,7 +5056,7 @@ else
  ;;
     ARM)         TARGET_HAS_JIT=1
  ;;
-    Mico32)      TARGET_HAS_JIT=0
+    LM32)      TARGET_HAS_JIT=0
  ;;
     Mips)        TARGET_HAS_JIT=1
  ;;
@@ -5312,7 +5312,7 @@ _ACEOF
 
 fi
 
-ALL_TARGETS="X86 Sparc PowerPC ARM AArch64 Mico32 Mips XCore MSP430 CppBackend NVPTX Hexagon SystemZ R600"
+ALL_TARGETS="X86 Sparc PowerPC ARM AArch64 LM32 Mips XCore MSP430 CppBackend NVPTX Hexagon SystemZ R600"
 ALL_TARGETS=$ALL_TARGETS
 
 
@@ -5338,7 +5338,7 @@ case "$enableval" in
         aarch64)  TARGETS_TO_BUILD="AArch64 $TARGETS_TO_BUILD" ;;
         arm64)    TARGETS_TO_BUILD="AArch64 $TARGETS_TO_BUILD" ;;
         arm)      TARGETS_TO_BUILD="ARM $TARGETS_TO_BUILD" ;;
-        mico32)   TARGETS_TO_BUILD="Mico32 $TARGETS_TO_BUILD" ;;
+        lm32)   TARGETS_TO_BUILD="LM32 $TARGETS_TO_BUILD" ;;
         mips)     TARGETS_TO_BUILD="Mips $TARGETS_TO_BUILD" ;;
         mipsel)   TARGETS_TO_BUILD="Mips $TARGETS_TO_BUILD" ;;
         mips64)   TARGETS_TO_BUILD="Mips $TARGETS_TO_BUILD" ;;
@@ -5357,7 +5357,7 @@ case "$enableval" in
             PowerPC)     TARGETS_TO_BUILD="PowerPC $TARGETS_TO_BUILD" ;;
             AArch64)     TARGETS_TO_BUILD="AArch64 $TARGETS_TO_BUILD" ;;
             ARM)         TARGETS_TO_BUILD="ARM $TARGETS_TO_BUILD" ;;
-            Mico32)      TARGETS_TO_BUILD="Mico32 $TARGETS_TO_BUILD" ;;
+            LM32)      TARGETS_TO_BUILD="LM32 $TARGETS_TO_BUILD" ;;
             Mips)        TARGETS_TO_BUILD="Mips $TARGETS_TO_BUILD" ;;
             XCore)       TARGETS_TO_BUILD="XCore $TARGETS_TO_BUILD" ;;
             MSP430)      TARGETS_TO_BUILD="MSP430 $TARGETS_TO_BUILD" ;;
