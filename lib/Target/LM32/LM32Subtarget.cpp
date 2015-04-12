@@ -24,7 +24,23 @@
 
 using namespace llvm;
 
+// Pin the vtable to this file.
 void LM32Subtarget::anchor() { }
+
+LM32Subtarget &
+LM32Subtarget::initializeSubtargetDependencies(StringRef CPU, StringRef FS) {
+    HasBarrel = false;
+    HasSDIV = false;
+    HasDIV = false;
+    HasMUL = false;
+    HasSPBias = false;
+    std::string CPUName = CPU;
+    if (CPUName.empty())
+        CPUName = "lm32";
+    // Parse features string.
+    ParseSubtargetFeatures(CPUName, FS);
+    return *this;
+}
 
 LM32Subtarget::LM32Subtarget(const std::string &TT, const std::string &CPU,
                              const std::string &FS, const TargetMachine &TM)
@@ -37,20 +53,12 @@ LM32Subtarget::LM32Subtarget(const std::string &TT, const std::string &CPU,
     // Note: must set both v64 and v128 since both are set in defaults.
     // **** This must match Targets.cpp in clang. ****
     DL("E-m:e-p:32:32:32-i8:8:32-i16:16:32-i32:32:32-i64:32:32-f32:32:32-f64:32:32-a0:8:32-S32-s0:32:32-n32-v64:32:32-v128:32:32"),
-    InstrInfo(*this),
+    InstrInfo(initializeSubtargetDependencies(CPU, FS)),
     FrameLowering(*this),
     TLInfo(TM),
-    TSInfo(DL),
-    HasBarrel(false),
-    HasSDIV(false),
-    HasDIV(false),
-    HasMUL(false),
-    HasSPBias(false)
+    TSInfo(DL)
 {
-
-  // Parse features string.
-  std::string CPUName = CPU;
-  if (CPUName.empty())
-    CPUName = "lm32";
-  ParseSubtargetFeatures(CPUName, FS);
+  if (hasSDIV())
+    report_fatal_error("sdiv option is not currently supported. ",
+                       false);
 }
