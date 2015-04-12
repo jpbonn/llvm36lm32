@@ -31,24 +31,24 @@ def LM32InstrInfo : InstrInfo;
 //===----------------------------------------------------------------------===//
 //FIXME: added for the (currently) undocumented DIV/MOD instructions
 def FeatureSDIV : 
-  SubtargetFeature<"sdiv", "HasSDIV", "false",
+  SubtargetFeature<"sdiv", "HasSDIV", "true",
                    "enable undocumented div 0x27 and mod 0x35 instructions - currently does nothing">;
 
 def FeatureDIV : 
   SubtargetFeature<"div", "HasDIV", "true",
-                   "enable divu and modu instructions.">;
+                   "enable divu and modu instructions (-div to disable).">;
 
 def FeatureMUL : 
   SubtargetFeature<"mul", "HasMUL", "true",
-                   "enable mul and muli instructions.">;
+                   "enable mul and muli instructions (-mul to disable).">;
 
 def FeatureBarrel : 
   SubtargetFeature<"barrel", "HasBarrel", "true",
-                   "Enable barrel shifter instructions">;
+                   "enable barrel shifter instructions (-barrel to disable)">;
 
 def FeatureABIstdSP : 
   SubtargetFeature<"abistdsp", "HasSPBias", "true",
-                   "SP points to last used 32 bit word on stack (not ABI compilant)">;
+                   "SP points to first unused 32 bit word on stack (LM32 ABI standard). (-abistdsp results in SP pointing to last used location.) ">;
 
 //===----------------------------------------------------------------------===//
 // LM32 supported processors.
