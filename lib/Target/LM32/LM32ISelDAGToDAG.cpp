@@ -192,7 +192,7 @@ SDNode* LM32DAGToDAGISel::Select(SDNode *Node) {
         SDValue imm = CurDAG->getTargetConstant(0, MVT::i32);
         int FI = dyn_cast<FrameIndexSDNode>(Node)->getIndex();
         EVT VT = Node->getValueType(0);
-  errs() << "ISD::FrameIndex value type: " <<  VT.getEVTString() << "/n";
+  //errs() << "ISD::FrameIndex value type: " <<  VT.getEVTString() << "/n";
         SDValue TFI = CurDAG->getTargetFrameIndex(FI, VT);
         unsigned Opc = LM32::ADDI;
         if (Node->hasOneUse())
