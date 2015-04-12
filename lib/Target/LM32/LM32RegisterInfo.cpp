@@ -227,10 +227,8 @@ needsStackRealignment(const MachineFunction &MF) const {
   DEBUG(if (!(MFI->getMaxAlignment() <= StackAlign))
              errs() << "\nError in function: "
                     << MF.getFunction()->getName() << "\n");
-  assert((MFI->getMaxAlignment() <= StackAlign)  &&
-            "Unable to align stack to requested alignment.");
-  assert(((MFI->getMaxAlignment() <= StackAlign) || 
-            MF.getFunction()->hasFnAttribute("no-realign-stack")) &&
+
+  assert(!MF.getFunction()->hasFnAttribute("no-realign-stack") &&
             "Unable to align stack to requested alignment.");
   bool requiresRealignment = 
                ((MFI->getMaxAlignment() > StackAlign) ||
