@@ -298,6 +298,7 @@ static Triple::ArchType parseArch(StringRef ArchName) {
     .StartsWith("arm", ARMArch)
     .StartsWith("thumb", ARMArch)
     .StartsWith("aarch64", ARMArch)
+    .Case("lm32", Triple::lm32)
     .Case("msp430", Triple::msp430)
     .Cases("mips", "mipseb", "mipsallegrex", Triple::mips)
     .Cases("mipsel", "mipsallegrexel", Triple::mipsel)
@@ -867,6 +868,7 @@ static unsigned getArchPointerBitWidth(llvm::Triple::ArchType Arch) {
   case llvm::Triple::armeb:
   case llvm::Triple::hexagon:
   case llvm::Triple::le32:
+  case llvm::Triple::lm32:
   case llvm::Triple::mips:
   case llvm::Triple::mipsel:
   case llvm::Triple::nvptx:
@@ -937,6 +939,7 @@ Triple Triple::get32BitArchVariant() const {
   case Triple::hexagon:
   case Triple::kalimba:
   case Triple::le32:
+  case Triple::lm32:
   case Triple::mips:
   case Triple::mipsel:
   case Triple::nvptx:
@@ -973,6 +976,7 @@ Triple Triple::get64BitArchVariant() const {
   case Triple::armeb:
   case Triple::hexagon:
   case Triple::kalimba:
+  case Triple::lm32:
   case Triple::msp430:
   case Triple::r600:
   case Triple::tce:
