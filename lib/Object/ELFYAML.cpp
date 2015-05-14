@@ -147,7 +147,7 @@ ScalarEnumerationTraits<ELFYAML::ELF_EM>::enumeration(IO &IO,
   ECase(EM_SCORE7)
   ECase(EM_DSP24)
   ECase(EM_VIDEOCORE3)
-  ECase(EM_LATTICEMICO32)
+  ECase(EM_LM32)
   ECase(EM_SE_C17)
   ECase(EM_TI_C6000)
   ECase(EM_TI_C2000)
